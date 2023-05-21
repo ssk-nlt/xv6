@@ -11,12 +11,10 @@ int main(){
     int ret_c=pipe(fd_cw);
     if(ret_w==-1)
     {
-        printf("there a wrong:father");
         exit(1);
     }
     if(ret_c==-1)
     {
-        printf("there a wrong:children");
         exit(1);
     }
 
@@ -28,7 +26,7 @@ int main(){
         close(fd_cw[0]);
         if(-1)
         {
-            printf("%d%d",ret_ww,ret_wr);
+            ret_ww=ret_wr;
         }
         printf("<%d>:received %s",getpid(),buf);
     }
@@ -39,7 +37,7 @@ int main(){
         int ret_cw=write(fd_cw[0],"pong",ONEBETY);
         if(-1)
         {
-            printf("%d%d",ret_cr,ret_cw);
+            ret_cr=ret_cw;
         }
         close(fd_fw[0]);
         close(fd_cw[1]);
