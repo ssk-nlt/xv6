@@ -20,7 +20,8 @@ int main(){
         read(fd_fw[1],buf,ONEBETY);
         printf("<%d>:received %s",getpid(),buf);
         write(fd_cw[0],"pong",ONEBETY);
-        exit();
+        exit(0);
     }
+    exit(0);
     return 0;
 }
