@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define ONEBETY 1
+#define ONEBETY 16
 int main(){
     int fd_fw[2];
     int fd_cw[2];
@@ -14,7 +14,7 @@ int main(){
         printf("there a wrong:father");
         exit(1);
     }
-    if(ret_w==-1)
+    if(ret_c==-1)
     {
         printf("there a wrong:children");
         exit(1);
