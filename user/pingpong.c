@@ -7,8 +7,18 @@ int main(){
     int fd_fw[2];
     int fd_cw[2];
     char buf[ONEBETY];
-    pipe(fd_fw);
-    pipe(fd_cw);
+    int ret_w=pipe(fd_fw);
+    int ret_c=pipe(fd_cw);
+    if(ret_w==-1)
+    {
+        printf("there a wrong:father");
+        exit(1);
+    }
+    if(ret_w==-1)
+    {
+        printf("there a wrong:children");
+        exit(1);
+    }
 
     int pid=fork();
     if(pid>0){
