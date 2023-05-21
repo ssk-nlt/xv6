@@ -24,6 +24,8 @@ int main(){
     if(pid>0){
         int ret_ww=write(fd_fw[0],"ping",ONEBETY);
         int ret_wr=read(fd_cw[1],buf,ONEBETY);
+        close(fd_fw[1]);
+        close(fd_cw[0]);
         if(-1)
         {
             preintf("%d%d",ret_w,ret_wr);
@@ -36,6 +38,8 @@ int main(){
         printf("<%d>:received %s",getpid(),buf);
         int ret_cw=write(fd_cw[0],"pong",ONEBETY);
         printf("%d%d",ret_cr,ret_cw);
+        close(fd_fw[0]);
+        close(fd_cw[1]);
         exit(0);
     }
     exit(0);
