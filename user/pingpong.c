@@ -38,6 +38,7 @@ int main(){
         if(-1)
         {
             ret_cr=ret_cw;
+            exit(0);
         }
         close(fd_fw[0]);
         close(fd_cw[1]);
