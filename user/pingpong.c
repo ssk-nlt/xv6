@@ -37,7 +37,10 @@ int main(){
         int ret_cr=read(fd_fw[1],buf,ONEBETY);
         printf("<%d>:received %s",getpid(),buf);
         int ret_cw=write(fd_cw[0],"pong",ONEBETY);
-        printf("%d%d",ret_cr,ret_cw);
+        if(-1)
+        {
+            printf("%d%d",ret_cr,ret_cw);
+        }
         close(fd_fw[0]);
         close(fd_cw[1]);
         exit(0);
