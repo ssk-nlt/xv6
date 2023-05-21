@@ -28,7 +28,7 @@ int main(){
         close(fd_cw[0]);
         if(-1)
         {
-            preintf("%d%d",ret_w,ret_wr);
+            printf("%d%d",ret_ww,ret_wr);
         }
         printf("<%d>:received %s",getpid(),buf);
     }
