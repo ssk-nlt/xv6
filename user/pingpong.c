@@ -28,12 +28,12 @@ int main(){
         {
             ret_ww=ret_wr;
         }
-        printf("<%d>:received %s",getpid(),buf);
+        printf("<%d>:received %s\n",getpid(),buf);
     }
     else
     {
         int ret_cr=read(fd_fw[1],buf,ONEBETY);
-        printf("<%d>:received %s",getpid(),buf);
+        printf("<%d>:received %s\n",getpid(),buf);
         int ret_cw=write(fd_cw[0],"pong",ONEBETY);
         if(-1)
         {
