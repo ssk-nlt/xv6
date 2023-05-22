@@ -18,7 +18,7 @@ xargs完成了两个行为：
 
 //$echo hello too | xargs echo bye
 int main(int argc,char *argv[]){
-    sleep(20);   //有时候点一个命令没有执行完，所以等待其输出到标准化输出
+    sleep(30);   //有时候点一个命令没有执行完，所以等待其输出到标准化输出
 
     //Q1如何获取前一个命令的标准化输出（即此命令的标准化输入）呢？
     char buf[MSGSIZE];
