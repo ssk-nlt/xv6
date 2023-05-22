@@ -11,7 +11,7 @@
  * find <path> <file name>
  * @param path:从该目录下查找
  * @param name：要查找的文件名
- * @return
+ * @return file name(without slash)
  */
 
 
