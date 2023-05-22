@@ -31,9 +31,6 @@ void primes(int p[]){
     }
 }
 
-
-
-
 int main(int argc,char *argv[])
 {
     int p[2];
