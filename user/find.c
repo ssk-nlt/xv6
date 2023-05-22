@@ -1,6 +1,6 @@
 #include "kernel/types.h"
 #include "user/user.h"
-#include "kernel/stst.h"
+#include "kernel/stat.h"
 #include "kernel/fs.h"
 
 //struct dirent用于存储目录中的文件信息
