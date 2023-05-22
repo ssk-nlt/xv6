@@ -11,11 +11,11 @@ int main(){
     int ret_c=pipe(fd_cw);
     if(ret_w==-1)
     {
-        exit(1);
+        perror("pipe");
     }
     if(ret_c==-1)
     {
-        exit(1);
+        perror("pipe");
     }
 
     int pid=fork();
@@ -24,9 +24,13 @@ int main(){
         int ret_wr=read(fd_cw[1],buf,ONEBETY);
         close(fd_fw[1]);
         close(fd_cw[0]);
-        if(-1)
+        if(ret_ww==-1)
         {
-            ret_ww=ret_wr;
+            perror("write");
+        }
+        if(ret_wr==-1)
+        {
+            perror("read");
         }
         printf("<%d>:received %s\n",pid,buf);
     }
@@ -35,10 +39,13 @@ int main(){
         int ret_cr=read(fd_fw[1],buf,ONEBETY);
         printf("<%d>:received %s\n",pid,buf);
         int ret_cw=write(fd_cw[0],"pong",ONEBETY);
-        if(-1)
+        if(ret_cr==-1)
         {
-            ret_cr=ret_cw;
-            exit(0);
+            perror("read");
+        }
+        if(ret_cw==-1)
+        {
+            perror("write");
         }
         close(fd_fw[0]);
         close(fd_cw[1]);
@@ -46,5 +53,4 @@ int main(){
     }
     exit(0);
     return 0;
-
 }
