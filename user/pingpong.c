@@ -1,56 +1,26 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "kernel/types.h"
+#include "user.h"
 
-#define ONEBETY 16
-int main(){
-    int fd_fw[2];
-    int fd_cw[2];
-    char buf[ONEBETY];
-    int ret_w=pipe(fd_fw);
-    int ret_c=pipe(fd_cw);
-    if(ret_w==-1)
-    {
-        perror("pipe");
+int main(int argc,char* argv[]){
+    //创建两个管道，分别实现ping、pong的读写
+    int p[2];
+    pipe(p);
+    char readtext[10];//作为父进程和子进程的读出容器
+    //子程序读出
+    int pid = fork();
+    if(pid==0){
+        read(p[0],readtext,10);
+        printf("%d: received %s\n",getpid(),readtext);
+        write(p[1],"pong",10);
+        exit(0);//子进程一定要退出
     }
-    if(ret_c==-1)
-    {
-        perror("pipe");
+        //父程序写入
+    else{
+        write(p[1],"ping",10);
+        wait(0);//父进程阻塞，等待子进程读取
+        read(p[0],readtext,10);
+        printf("%d: received %s\n",getpid(),readtext);
+        //exit(0);//父进程一定要退出
     }
-
-    int pid=fork();
-    if(pid>0){
-        int ret_ww=write(fd_fw[0],"ping",ONEBETY);
-        int ret_wr=read(fd_cw[1],buf,ONEBETY);
-        close(fd_fw[1]);
-        close(fd_cw[0]);
-        if(ret_ww==-1)
-        {
-            perror("write");
-        }
-        if(ret_wr==-1)
-        {
-            perror("read");
-        }
-        printf("<%d>:received %s\n",pid,buf);
-    }
-    else
-    {
-        int ret_cr=read(fd_fw[1],buf,ONEBETY);
-        printf("<%d>:received %s\n",pid,buf);
-        int ret_cw=write(fd_cw[0],"pong",ONEBETY);
-        if(ret_cr==-1)
-        {
-            perror("read");
-        }
-        if(ret_cw==-1)
-        {
-            perror("write");
-        }
-        close(fd_fw[0]);
-        close(fd_cw[1]);
-        exit(0);
-    }
-    exit(0);
     return 0;
 }
