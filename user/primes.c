@@ -7,7 +7,7 @@
 
 void primes(int p[]){
     int res;
-    if(!read(p[0].&res,4)){
+    if(!read(p[0],&res,4)){
         exit(0);
     }
     fprintf(2,"prime %d\n",res);
@@ -20,7 +20,7 @@ void primes(int p[]){
     }else{
         close(c[0]);
         int tmp;
-        while(read(p[0],tmp,4)){
+        while(read(p[0],&tmp,4)){
             if(tmp%res!=0){
                 write(c[1],&tmp,4);
             }
