@@ -150,7 +150,7 @@ syscall(void)
           //syscall read->1023
           printf("%d: syscall %s -> %d\n",p->pid,syscall_names[num-1],p->trapframe->a0);
       }
-    p->trapframe->a0 = syscalls[num]();
+    //p->trapframe->a0 = syscalls[num]();
   } else {
     printf("%d %s: unknown sys call %d\n",
             p->pid, p->name, num);
