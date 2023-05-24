@@ -106,7 +106,7 @@ extern uint64 sys_write(void);
 extern uint64 sys_uptime(void);
 extern uint64 sys_trace(void);
 
-static uint64 (*syscalls[])(void) = { //表驱动
+static uint64 (*syscalls[])(void) = { //表驱动（函数指针表）
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,
 [SYS_wait]    sys_wait,
