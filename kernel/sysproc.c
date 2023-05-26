@@ -121,7 +121,7 @@ uint64 sys_sysinfo(void){
     info.freemem=acquire_freemem();
 
     if(argaddr(0,&addr)<0)
-        return -a;
+        return -1;
 
     if(copyout(p->pagetable,addr,(char*)&info,sizeof(info))<0)
         return -1;
