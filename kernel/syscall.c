@@ -146,13 +146,11 @@ syscall(void)
 
     num = p->trapframe->a7;
     if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-        p->trapframe->a0 = syscalls[num]();
+        p->trapframe->a0 = syscalls[num](); // 通过系统调用编号，获取系统调用处理函数的指针，调用并将返回值存到用户进程的 a0 寄存器中
         int trace_mask=p->trace_mask;
         if((trace_mask>>num)&1){
-            //syscall read->1023
             printf("%d: syscall %s -> %d\n",p->pid,syscall_names[num-1],p->trapframe->a0);
         }
-        //p->trapframe->a0 = syscalls[num]();
     } else {
         printf("%d %s: unknown sys call %d\n",
                p->pid, p->name, num);
