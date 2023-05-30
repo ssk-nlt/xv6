@@ -127,7 +127,7 @@ found:
     return 0;
   }
 
-  //todo Allocate an usyscall page
+  //to do Allocate an usyscall page
     if((p->usyscall = (struct usyscall *)kalloc()) == 0){
         freeproc(p);
         release(&p->lock);
@@ -207,7 +207,7 @@ proc_pagetable(struct proc *p)
     return 0;
   }
 
-  // todo map the usyscalll below TRAMPOLINE
+  // to do map the usyscalll below TRAMPOLINE
     if(mappages(pagetable, USYSCALL, PGSIZE,
                 (uint64)(p->usyscall), PTE_R | PTE_U) < 0){
         uvmunmap(pagetable,USYSCALL,1,0);
@@ -224,7 +224,7 @@ proc_pagetable(struct proc *p)
 void
 proc_freepagetable(pagetable_t pagetable, uint64 sz)
 {
-    // todo unmap usyscall page
+    // to do unmap usyscall page
     uvmunmap(pagetable,USYSCALL,1,0);
     uvmunmap(pagetable, TRAMPOLINE, 1, 0);
     uvmunmap(pagetable, TRAPFRAME, 1, 0);
