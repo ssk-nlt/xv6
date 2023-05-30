@@ -250,7 +250,7 @@ userinit(void)
   struct proc *p;
 
   p = allocproc();
-  initproc = p;z
+  initproc = p;
   
   // allocate one user page and copy init's instructions
   // and data into it.
