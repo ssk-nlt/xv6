@@ -101,7 +101,7 @@ sys_pgaccess(void)
       res=res|abit<<i;
   }
 
-  if(copyout(p->pagetable),bitmask,(char*)&res,sizeof(res)<0){
+  if(copyout(p->pagetable,bitmask,(char*)&res,sizeof(res))<0){
       return -1;
   }
   return 0;
