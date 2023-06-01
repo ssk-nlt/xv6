@@ -102,7 +102,7 @@ sys_pgaccess(void)
   }
 
   if(copyout(p->pagetable),bitmask,(char*)&res,sizeof(res)<0){
-      return -a;
+      return -1;
   }
   return 0;
 }
