@@ -120,7 +120,7 @@ uint64
 sys_sigreturn(void)
 {
     struct proc *p=myproc();
-    memcpy(p->trapframe,p->tick_traptrame, sizeof(struct trapframe));
+    memmove(p->trapframe,p->tick_traptrame, sizeof(struct trapframe));
     p->handler_executing=0;
     return 0;
 }
