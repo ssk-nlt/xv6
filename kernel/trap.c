@@ -5,7 +5,6 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
-#include "string.h"
 
 struct spinlock tickslock;
 uint ticks;
@@ -34,7 +33,7 @@ void
 store(void)
 {
     struct proc *p=myproc();
-   *p->tick_traptrame=*p->trapframe;
+    *p->tick_traptrame=*p->trapframe;
 }
 
 
