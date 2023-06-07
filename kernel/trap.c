@@ -88,7 +88,7 @@ usertrap(void)
               p->ticks_cnt=0;
               p->tick_epc=p->trapframe->epc;
               memcpy(p->tick_traptrame,p->trapframe, sizeof(struct trapframe));
-              p->handler_execut ing=1;
+              p->handler_executing=1;
               p->trapframe->epc=p->handler;
           }
       }
