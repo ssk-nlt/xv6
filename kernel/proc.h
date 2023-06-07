@@ -107,11 +107,10 @@ struct proc {
   char name[16];               // Process name (debugging)
 
   //alarm
-  int ticks;
-  int ticks_cnt;
-  uint64 handler;
-  struct traptrame *tick_traptrame;
-  int handler_executing;
-
+  int alarm_interval;
+  void (*alarm_handler)();
+  int ticks_count;
+  int is_alarming;
+  struct trapframe* alarm_trapframe;
 
 };

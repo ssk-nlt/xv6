@@ -141,8 +141,16 @@ found:
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
 
-  p->ticks=0;
-  p->handler_executing=0;
+    if((p->alarm_trapframe = (struct trapframe*)kalloc()) == 0) {
+        freeproc(p);
+        release(&p->lock);
+        return 0;
+    }
+  p->is_alarming=0;
+  p->alarm_interval=0;
+  p->alarm_handler=0;
+  p->ticks_count=0;
+
 
   return p;
 }
@@ -167,6 +175,12 @@ freeproc(struct proc *p)
   p->killed = 0;
   p->xstate = 0;
   p->state = UNUSED;
+
+  p->alarm_trapframe = 0;
+  p->is_alarming = 0;
+  p->alarm_interval=0;
+  p->alarm_handler=0;
+  p->ticks_count=0;
 }
 
 // Create a user page table for a given process,

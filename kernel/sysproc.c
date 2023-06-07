@@ -101,26 +101,27 @@ sys_uptime(void)
 uint64
 sys_sigalarm(void)
 {
-    int ticks;
+    int interval;
     uint64 handler;
 
-    argint(0,&ticks);
+    argint(0,&interval);
     argaddr(1,&handler);
-
     struct proc *p=myproc();
-    p->ticks=ticks;
-    p->handler=handler;
-    p->ticks_cnt=0;
+    p->alarm_interval=interval;
+    p->alarm_handler=handler;
+
+//    struct proc *p=myproc();
+//    p->ticks=ticks;
+//    p->handler=handler;
+//    p->ticks_cnt=0;
 
     return 0;
 }
 
 
 uint64
-sys_sigreturn(void)
-{
-    struct proc *p=myproc();
-    memcpy(p->trapframe,p->tick_traptrame, sizeof(struct trapframe));
-    p->handler_executing=0;
+sys_sigreturn(void) {
+    memmove(myproc()->trapframe, myproc()->alarm_trapframe, sizeof(struct trapframe));
+    myproc()->is_alarming = 0;
     return 0;
 }
