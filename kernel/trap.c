@@ -33,7 +33,7 @@ void
 store(void)
 {
     struct proc *p=myproc();
-    *p->tick_traptrame=*(p->trapframe);
+    *(p->tick_traptrame)=*(p->trapframe);
 }
 
 
