@@ -5,6 +5,7 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
+#include "string.h"
 
 struct spinlock tickslock;
 uint ticks;
@@ -28,6 +29,15 @@ trapinithart(void)
 {
   w_stvec((uint64)kernelvec);
 }
+
+void
+store(void)
+{
+    struct proc *p=myproc();
+    memcpy(p->tick_traptrame,p->trapframe,sizeof(trapframe));
+}
+
+
 
 //
 // handle an interrupt, exception, or system call from user space.
@@ -78,7 +88,19 @@ usertrap(void)
 
   // give up the CPU if this is a timer interrupt.
   if(which_dev == 2)
-    yield();
+  {
+      if(p->ticks>0){
+          p->ticks_cnt++;
+          if(p->handler_executing==0&&p->ticks_cnt>p->ticks){
+              p->ticks_cnt=0;
+              p->tick_epc=p->trapframe->epc;
+              store();
+              p->handler_executing=1;
+              p->trapframe->epc=p->handler;
+          }
+      }
+      yield();
+  }
 
   usertrapret();
 }
