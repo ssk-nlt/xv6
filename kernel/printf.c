@@ -139,8 +139,13 @@ backtrace()
     printf("backertrace:\n");
     uint64 fp=r_fp();
     uint64 *frame=(uint64*) fp;
-    printf("fp:%p\n",fp);
-    printf("frame[-1]:%p\n",frame[-1]);
-    printf("frame[-2]:%p\n",frame[-2]);
+
+    uint64 up= PGROUNDUP(fp);
+    uint64 down= PGROUNDDOWN(fp);
+    while(fp<up&&fp>down){
+        printf("%p\n",frame[-1]);
+        fp=frame[-2];
+        frame=(uint64*) fp;
+    }
 
 }
