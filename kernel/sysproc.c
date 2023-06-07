@@ -118,7 +118,7 @@ sys_sigalarm(void)
 void restore()
 {
     struct proc *p=myproc();
-    memcpy(p->trapframe,p->tick_traptrame, sizeof(trapframe));
+  *p->trapframe=*p->tick_traptrame;
 }
 
 

@@ -34,7 +34,7 @@ void
 store(void)
 {
     struct proc *p=myproc();
-    memcpy(p->tick_traptrame,p->trapframe,sizeof(trapframe));
+   *p->tick_traptrame=*p->trapframe;
 }
 
 
