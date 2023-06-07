@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "string.c"
 
 uint64
 sys_exit(void)
@@ -117,7 +118,7 @@ sys_sigalarm(void)
 void restore()
 {
     struct proc *p=myproc();
-  *p->trapframe=*p->tick_traptrame;
+    memcpy(p->trapframe,p->tick_traptrame, sizeof(struct trapframe));
 }
 
 
