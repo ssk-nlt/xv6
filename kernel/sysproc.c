@@ -120,7 +120,6 @@ uint64
 sys_sigreturn(void)
 {
     struct proc *p=myproc();
-    p->trapframe->epc=p->tick_epc;
     memcpy(p->trapframe,p->tick_traptrame, sizeof(struct trapframe));
     p->handler_executing=0;
     return 0;

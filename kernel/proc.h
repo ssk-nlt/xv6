@@ -110,7 +110,6 @@ struct proc {
   int ticks;
   int ticks_cnt;
   uint64 handler;
-  uint64 tick_epc;
   struct traptrame *tick_traptrame;
   int handler_executing;
 
