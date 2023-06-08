@@ -108,7 +108,7 @@ struct proc {
 
   //alarm
   int alarm_interval;
-  void (*alarm_handler)();
+  uint64 alarm_handler;
   int ticks_count;
   int is_alarming;
   struct trapframe* alarm_trapframe;
