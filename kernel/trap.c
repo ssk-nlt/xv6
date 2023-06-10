@@ -49,7 +49,8 @@ usertrap(void)
   
   // save user program counter.
   p->trapframe->epc = r_sepc();
-  
+
+  uint64 cause = r_scause();
   if(r_scause() == 8){
     // system call
 
