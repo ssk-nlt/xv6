@@ -68,11 +68,11 @@ kfree(void *pa)
 
   push_off();
   int id=cpuid();
-  acquire(&kmem.lock);
-  r->next = kmem.freelist;
+  acquire(&kmem[id].lock);
+  r->next = kmem[id].freelist;
   kmem[id].freelist=r;
   //kmem.freelist = r;
-  release(&kmem.lock);
+  release(&kmem[id].lock);
   pop_off();
 }
 
