@@ -18,10 +18,10 @@ struct run {
   struct run *next;
 };
 
-struct {
-  struct spinlock lock;
-  struct run *freelist;
-} kmem;
+//struct {
+//  struct spinlock lock;
+//  struct run *freelist;
+//} kmem;
 
 struct{
     struct spinlock lock;
@@ -32,9 +32,9 @@ void
 kinit()
 {
     char lockname[8];
-    for(int i=0;i<NPCU;i++)
+    for(int i=0;i<NCPU;i++)
     {
-        snprintf(lockname,sizeof(lockname)."kmem_%d",i);
+        snprintf(lockname,sizeof(lockname),"kmem_%d",i);
         initlock(&kmem[i].lock,lockname);
     }
     freerange(end, (void*)PHYSTOP);
